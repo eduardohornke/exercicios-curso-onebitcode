@@ -1,53 +1,34 @@
 class spaceship {
-    constructor(name, crewQuantity){
-        this.name = name;
-        this.crewQuantity = crewQuantity;
-        this.isHitched = false;
-        this.entraceDoorsOpen = false;
+    constructor(name, crewQuantity) {
+        this.name = name
+        this.crewQuantity = crewQuantity
+        this.isHitched = false
+        this.doors = "Fechadas"
     }
-    hitch() {
-        this.isHitched = true;
-        this.entraceDoorsOpen = true;
-    }
-}
-
-function showMenu () {
-    let chosenOption
-    while (chosenOption != "1" && chosenOption != "2" && chosenOption != "3") {
-           chosenOption = prompt( "O que deseja fazer?\n1 - Engatar Nave\n2 - Imprimir Naves\n3 - Sair");
-    }
-    return chosenOption;
-}
-
-function createSpaceship() {
-    let spaceshipName = prompt("Digite o nome da nave");
-    let crewQuantity = prompt("Digite a quantidade de pessoas na nave");
-    let spaceship = new spaceship(spaceshipName, crewQuantity);
-    return spaceship;
-}
-
-function printSpaceshipList(spaceships) {
-let spaceshipList = "";
-spaceships.forEach((spaceship, index) => {
-    spaceshipList += (index + 1) + "- " + spaceship.name + " (" + spaceship.crewQuantity + " pessoas)\n";
-})
-alert(spaceshipList);
-}
-
-let hitchedSpaceships = [];
-
-let chosenOption
-
-while (chosenOption != "3") {
-    chosenOption = showMenu();
-    switch (chosenOption) {
-        case "1":
-            let spaceshipToAdd = createSpaceship();
-            spaceshipToAdd.hitch();
-            hitchedSpaceships.push(spaceshipToAdd);
-            break;
-        case "2":
-            printSpaceshipList(hitchedSpaceships);
-            break;
+    hitch(){
+        this.isHitched = true
     }
 }
+
+let spacialSpaceship = []
+
+while (chosenOption != 3) {
+    var chosenOption = prompt("Bem-vindo, capitão. O que deseja fazer (digite o número da opção)?" +
+        "\n\n1- Realizar engate" +
+        "\n2- Imprimir lista de naves engatadas" +
+        "\n3- Sair do programa"
+    )
+
+    if (chosenOption == 1) {
+        var newSpaceship = new spaceship(prompt("Digite o nome da nave:"), parseInt(prompt("Digite a quantidade de tripulantes:")))
+        newSpaceship.hitch()
+        newSpaceship.doors = "Abertas"
+        spacialSpaceship.push(newSpaceship)
+    } else if (chosenOption == 2) {
+        alert("Naves engatadas:\n\n" + spacialSpaceship.map( item => item.name).join("\n"))
+    }
+}
+
+let anotherSpaceship = new spaceship("Tornado", 100)
+spacialSpaceship.push(anotherSpaceship)
+console.table(spacialSpaceship)
